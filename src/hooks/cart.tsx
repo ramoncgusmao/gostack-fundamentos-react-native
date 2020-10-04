@@ -82,9 +82,9 @@ const CartProvider: React.FC = ({ children }) => {
     async id => {
       const arrayId = findIndex(id);
       if (arrayId > -1) {
-        const newProducts = products.map(p =>
-          p.id === id ? { ...p, quantity: p.quantity - 1 } : p,
-        );
+        const newProducts = products
+          .map(p => (p.id === id ? { ...p, quantity: p.quantity - 1 } : p))
+          .filter(p => p.quantity > 0);
         setProducts(newProducts);
         atualizarAsyncStorage(newProducts);
       }
